@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
     /* This script is responsible for handling player input and storing the input values in public variables
@@ -10,11 +11,25 @@ public class InputHandler : MonoBehaviour
     public float horizontal, vertical, moveAmount, mouseX, mouseY;
 
     PlayerControls inputActions;
+    CameraHandler cameraHandler;
     Vector2 movementInput;
     Vector2 cameraInput;
 
+    private void Awake(){
+        cameraHandler = CameraHandler.singleton;
+        Cursor.visible = false;
+    }
 
-    // OnEnable() sets up the PlayerControls input actions and enables them for use
+    private void FixedUpdate(){
+        float delta = Time.deltaTime;
+
+        if(cameraHandler != null){
+            cameraHandler.FollowTarget(delta);
+            cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
+        }
+    }
+
+    // Sets up the PlayerControls input actions and enables them for use
     public void OnEnable(){
         if (inputActions == null){
             inputActions = new PlayerControls();
@@ -25,7 +40,7 @@ public class InputHandler : MonoBehaviour
         inputActions.Enable();
     }   
 
-    // OnDisable() disables the input actions when this script is disabled or destroyed
+    // Disables the input actions when this script is disabled or destroyed
     private void OnDisable(){
         inputActions.Disable();
     }
