@@ -9,6 +9,8 @@ using UnityEngine;
 public class AnimatorHandler : MonoBehaviour
 {
     public Animator anim;
+    public InputHandler inputHandler;
+    public PlayerLocomotion playerLocomotion;
     int vertical;
     int horizontal;
     public bool canRotate;
@@ -16,6 +18,8 @@ public class AnimatorHandler : MonoBehaviour
     // The Initialize() method gets the Animator component attached to the game object and assigns the hash values for the "Vertical" and "Horizontal" parameters.
     public void Initialize(){
         anim = GetComponent<Animator>();
+        inputHandler = GetComponentInParent<InputHandler>();
+        playerLocomotion = GetComponentInParent<PlayerLocomotion>();
         vertical = Animator.StringToHash("Vertical");
         horizontal = Animator.StringToHash("Horizontal");
     }
@@ -66,6 +70,23 @@ public class AnimatorHandler : MonoBehaviour
         anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
     }
 
+    public void PlayerTargetAnimation(string targetAnim, bool isInteracting){
+        anim.applyRootMotion = isInteracting;
+        anim.SetBool("isInteraction", isInteracting);
+        anim.CrossFade(targetAnim, 0.2f);
+    }
+
+    public void OnAnimatorMove(){
+        if (inputHandler.isInteracting == false)
+            return;
+            
+            float delta = Time.deltaTime;
+            playerLocomotion.rigidbody.drag = 0;
+            Vector3 deltaPosition = anim.deltaPosition;
+            deltaPosition.y = 0;
+            Vector3 velocity = deltaPosition / delta;
+            playerLocomotion.rigidbody.velocity = velocity;
+    }
     // The method sets the canRotate variable to true, allowing the character to rotate.
     public void CanRotate(){
         canRotate = true;
