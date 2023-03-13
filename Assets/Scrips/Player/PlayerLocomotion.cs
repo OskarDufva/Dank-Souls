@@ -26,6 +26,8 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     float rotationSpeed = 10;
 
+    private float currentVelocity;
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -62,10 +64,11 @@ public class PlayerLocomotion : MonoBehaviour
 
         float rs = rotationSpeed;
 
-        Quaternion tr = Quaternion.LookRotation(targetDir);
-        Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+        // Quaternion tr = Quaternion.LookRotation(targetDir);
+        // Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+        float currentAngle = Mathf.SmoothDampAngle(myTransform.eulerAngles.y, Quaternion.LookRotation(targetDir).eulerAngles.y, ref currentVelocity, rs * delta);
 
-        myTransform.rotation = targetRotation;
+        myTransform.rotation = Quaternion.Euler(0f, currentAngle, 0f);
     }
 
 
@@ -79,7 +82,8 @@ public class PlayerLocomotion : MonoBehaviour
         moveDirection *= speed;
 
         Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
-        rigidbody.velocity = projectedVelocity;
+        //rigidbody.velocity = projectedVelocity;
+        rigidbody.MovePosition(rigidbody.position + projectedVelocity * delta);
 
         animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0);
 
