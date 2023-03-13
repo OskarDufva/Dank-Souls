@@ -72,7 +72,7 @@ public class AnimatorHandler : MonoBehaviour
 
     public void PlayerTargetAnimation(string targetAnim, bool isInteracting){
         anim.applyRootMotion = isInteracting;
-        anim.SetBool("isInteraction", isInteracting);
+        anim.SetBool("isInteracting", isInteracting);
         anim.CrossFade(targetAnim, 0.2f);
     }
 
