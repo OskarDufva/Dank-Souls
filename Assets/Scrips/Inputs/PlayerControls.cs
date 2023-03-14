@@ -147,8 +147,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""id"": ""9c17ad42-8b74-4d86-af35-3332b1f79357"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""SlowTap"",
-                    ""initialStateCheck"": false
+                    ""interactions"": ""SlowTap,Hold"",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
