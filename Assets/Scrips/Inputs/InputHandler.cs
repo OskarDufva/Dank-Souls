@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
 
-    /* This script is responsible for handling player input and storing the input values in public variables
-    The public variables include horizontal and vertical movement input, camera mouse input and move amount
-    PlayerControls is used to define input actions and read input values using the Unity Input System
-    Vector2 variables are used to store the movement and camera input values, which are later used to update the public variables */
-
+#region Description
+/* This script is responsible for handling player input and storing the input values in public variables
+The public variables include horizontal and vertical movement input, camera mouse input and move amount
+PlayerControls is used to define input actions and read input values using the Unity Input System
+Vector2 variables are used to store the movement and camera input values, which are later used to update the public variables */
+#endregion
 public class InputHandler : MonoBehaviour
 {
     public float horizontal, vertical, moveAmount, mouseX, mouseY;
