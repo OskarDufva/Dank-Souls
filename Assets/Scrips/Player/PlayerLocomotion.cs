@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/* This script handles the player's movement and rotation. 
-It retrieves the player's input through the InputHandler script, calculates the movement direction based on the camera's forward and right vectors, and applies movement to the player using a Rigidbody. 
-It also handles the player's rotation using the HandleRotation method, which uses the player's input to calculate the target direction and smoothly rotates the player towards it using Quaternion.Slerp. 
-Finally, it updates the animator values for the player's movement based on the inputHandler.moveAmount value. 
-The animatorHandler.canRotate variable is used to determine if the player can rotate while moving. */
+#region Description
+/**********************************************************************************************************************************************************************************************************\
+/ This script handles the player's movement and rotation.                                                                                                                                                  \
+/ It retrieves the player's input through the InputHandler script, calculates the movement direction based on the camera's forward and right vectors, and applies movement to the player using a Rigidbody.\ 
+/ It also handles the player's rotation using the HandleRotation method, which uses the player's input to calculate the target direction and smoothly rotates the player towards it using Quaternion.Slerp.\
+/ Finally, it updates the animator values for the player's movement based on the inputHandler.moveAmount value.                                                                                            \
+/ The animatorHandler.canRotate variable is used to determine if the player can rotate while moving.                                                                                                       \
+/**********************************************************************************************************************************************************************************************************/
+#endregion
 public class PlayerLocomotion : MonoBehaviour
 {
     PlayerManager playerManager;
@@ -66,7 +70,6 @@ public class PlayerLocomotion : MonoBehaviour
         myTransform.rotation = targetRotation;
     }
 
-
     public void HandleMovement(float delta){
 
         if (inputHandler.rollFlag)
@@ -80,6 +83,7 @@ public class PlayerLocomotion : MonoBehaviour
         float speed = movementSpeed;
 
         if (inputHandler.sprintFlag){
+            animatorHandler.PlayerTargetAnimation("Sprint", true);
             speed = sprintSpeed;
             playerManager.isSprinting = true;
             moveDirection *= speed;

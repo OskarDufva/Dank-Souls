@@ -592,7 +592,8 @@ MonoBehaviour:
   animatorHandler: {fileID: 0}
   rigidbody: {fileID: 0}
   normalCamera: {fileID: 0}
-  movementSpeed: 5
+  movementSpeed: 2
+  sprintSpeed: 3
   rotationSpeed: 10
 --- !u!114 &858609802
 MonoBehaviour:
@@ -613,7 +614,8 @@ MonoBehaviour:
   mouseY: 0
   b_Input: 0
   rollFlag: 0
-  isInteracting: 0
+  sprintFlag: 0
+  rollInputTimer: 0
 --- !u!95 &858609803
 Animator:
   serializedVersion: 4
@@ -624,7 +626,7 @@ Animator:
   m_GameObject: {fileID: 858609797}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f987306e6582b2e49af64dc862a5c799, type: 2}
+  m_Controller: {fileID: 9100000, guid: b8bf844e01be0ed4e86ec618d466b79c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -646,6 +648,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9d9ab7937e2a048815e0f87506275b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInteracting: 0
+  isSprinting: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,6 +1145,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  inputHandler: {fileID: 0}
-  playerLocomotion: {fileID: 0}
   canRotate: 1
