@@ -33,6 +33,8 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     float rotationSpeed = 10;
 
+    
+
 
     void Start()
     {
@@ -51,42 +53,41 @@ public class PlayerLocomotion : MonoBehaviour
     Vector3 targetPosition;
 
     private void HandleRotation(float delta){
-        Vector3 targetDir = Vector3.zero;
+        Vector3 targetDir = Vector3.zero; 
         float moveOverride = inputHandler.moveAmount;
 
         targetDir = cameraObject.forward * inputHandler.vertical;
         targetDir += cameraObject.right * inputHandler.horizontal;
 
-        targetDir.Normalize();
-        targetDir.y = 0;
+        targetDir.Normalize(); // Normalize is called on targetDir to make sure its length is equal to 1
+        targetDir.y = 0;  // Sets targetDir.y to 0 to ensure that the player does not tilt upwards or downwards when rotating.
 
         if(targetDir == Vector3.zero)
-            targetDir = myTransform.forward;
+            targetDir = myTransform.forward; // targetDir is equal to 0,0,0 which means there is no movement input, the players current forward direction is used as the target direction.
 
         float rs = rotationSpeed;
 
-        Quaternion tr = Quaternion.LookRotation(targetDir);
-        Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
-        myTransform.rotation = targetRotation;
+        Quaternion tr = Quaternion.LookRotation(targetDir); // Sets the rotation to face the target direction
+        Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta); // Interpolates between the current rotation and the target rotation based on rs value and the delta time. 
+        myTransform.rotation = targetRotation; // Player transform rotation is set to new targetRotation.
     }
 
-    public void HandleMovement(float delta){
-
-        if (inputHandler.rollFlag)
+    // Handles player movement based on user input.
+    public void HandleMovement(float delta){    
+        if (inputHandler.rollFlag) // if the rollFlag is true in the inputHandler, it returns and does not execute any further movement code.
             return;
 
         moveDirection = cameraObject.forward * inputHandler.vertical;
         moveDirection += cameraObject.right * inputHandler.horizontal;
-        moveDirection.Normalize();
-        moveDirection.y = 0;
+        moveDirection.Normalize(); 
+        moveDirection.y = 0; // Sets y too 0 to ensure the player moves only on the horizontal plane.
 
         float speed = movementSpeed;
 
-        if (inputHandler.sprintFlag){
-            animatorHandler.PlayerTargetAnimation("Sprint", true);
-            speed = sprintSpeed;
+        if (inputHandler.sprintFlag){ // checks the sprintFlag in inputHandler.
+            speed = sprintSpeed; // sets the speed to sprintSpeed instead.
             playerManager.isSprinting = true;
-            moveDirection *= speed;
+            moveDirection *= speed; // moveDirection is multiplied with speed.
         }
         else
         {
