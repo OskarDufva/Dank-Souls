@@ -93,6 +93,7 @@ public class AnimatorHandler : MonoBehaviour
             Vector3 velocity = deltaPosition / delta;
             playerLocomotion.rigidbody.velocity = velocity;
     }
+    
     // The method sets the canRotate variable to true, allowing the character to rotate.
     public void CanRotate(){
         canRotate = true;

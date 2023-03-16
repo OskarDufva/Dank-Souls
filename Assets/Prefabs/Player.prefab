@@ -101,13 +101,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c1de78694ca9b47854c50662d891ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDirection: {x: 0, y: 0, z: 0}
   myTransform: {fileID: 0}
   animatorHandler: {fileID: 0}
   rigidbody: {fileID: 0}
   normalCamera: {fileID: 0}
+  groundDetectionRayStartPoint: 0.5
+  minimumDistanceNeededToBeginFall: 1
+  groundDirectionRaydistance: 0.2
+  inAirTimer: 0
   movementSpeed: 2
   sprintSpeed: 3
   rotationSpeed: 10
+  fallingSpeed: 80
 --- !u!95 &905716864919085703
 Animator:
   serializedVersion: 4
@@ -142,6 +148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteracting: 0
   isSprinting: 0
+  isInAir: 0
+  isGrounded: 0
 --- !u!1001 &905716866027426963
 PrefabInstance:
   m_ObjectHideFlags: 0
