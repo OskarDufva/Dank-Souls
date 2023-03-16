@@ -154,7 +154,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         if(playerManager.isInAir){
             rigidbody.AddForce(-Vector3.up * fallingSpeed);
-            rigidbody.AddForce(moveDirection * fallingSpeed / 10f);
+            rigidbody.AddForce(moveDirection * fallingSpeed / 8.5f);
         }
 
         Vector3 dir = moveDirection;

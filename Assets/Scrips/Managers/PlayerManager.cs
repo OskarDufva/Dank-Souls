@@ -59,7 +59,7 @@ public class PlayerManager : MonoBehaviour
         isSprinting = inputHandler.b_Input;
 
         if(isInAir){
-            playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.deltaTime;
+            playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.fixedDeltaTime;
         }
     }
 }
