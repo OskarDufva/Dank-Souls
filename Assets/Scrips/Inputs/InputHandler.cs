@@ -72,5 +72,7 @@ public class InputHandler : MonoBehaviour
 
             rollInputTimer = 0;
         }
+
+        sprintFlag = b_Input && rollInputTimer >= 0.5f;
     }
 }
