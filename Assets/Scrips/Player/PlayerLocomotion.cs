@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 #region Description
@@ -45,7 +46,6 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     float fallingSpeed = 45;
 
-    
     void Start()
     {
         playerManager = GetComponent<PlayerManager>();
@@ -58,6 +58,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         playerManager.isGrounded = true;
         ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
+
     }
 
 
@@ -132,7 +133,6 @@ public class PlayerLocomotion : MonoBehaviour
 
             if(inputHandler.moveAmount > 0){
                 animatorHandler.PlayerTargetAnimation("Rolling", true);
-                moveDirection.y = 0;
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                 myTransform.rotation = rollRotation;
             }
@@ -154,7 +154,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         if(playerManager.isInAir){
             rigidbody.AddForce(-Vector3.up * fallingSpeed);
-            rigidbody.AddForce(moveDirection * fallingSpeed / 8.5f);
+            //rigidbody.AddForce(moveDirection * fallingSpeed / 8.5f);
         }
 
         Vector3 dir = moveDirection;
